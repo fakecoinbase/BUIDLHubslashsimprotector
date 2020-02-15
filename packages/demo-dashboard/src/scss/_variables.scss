@@ -1,0 +1,68 @@
+// Override Boostrap variables
+@import '../../../../node_modules/bootstrap/scss/bootstrap';
+
+$white: #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #868e96 !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black: #000 !default;
+
+$blue-light: #1b64b9;
+$blue-dark: #584e95;
+$blue-haze: #9aadeb;
+$gold-light: #ffdf45;
+$gold-dark: #ffd401;
+
+$blue-gray: #758cc4;
+$blue-dark-info: darken($blue-gray, 5%);
+$blue-midnight: #002fa5 !default;
+
+$danger-transparent: rgba(213, 53, 69, .2);
+
+$bhub-off-white: #f8f8f8;
+$bhub-gray-light: #d3d3d3;
+$bhub-gray-medium: #848484;
+$bhub-gray-dark: #2c3036;
+$bhub-off-black: #04151c;
+$bhub-orange: rgb(253, 136, 49);
+$bhub-light-orange: rgb(255, 166, 50);
+
+$blue: #03a9f4 !default;
+$indigo: #3f51b5 !default;
+$purple: #673ab7 !default;
+$pink: #e91e63 !default;
+$red: #f44336 !default;
+$orange: #ff5722 !default;
+$yellow: #ffab00 !default;
+$green: #8bc34a !default;
+$teal: #009688 !default;
+$cyan: #00bcd4 !default;
+
+$theme-colors: (
+  'nav-bg': rgba(255, 255, 255, 1),
+  'main-bg': rgb(232, 232, 232),
+  'nav-item-text': rgba(255, 255, 255, 0.8),
+  'highlight-button-bg': $warning,
+  'input-placeholder': rgba(180, 180, 180, 0.8),
+  'highlight-gradient-start': $info,
+  'highlight-gradient-end': $primary,
+  'bi-text-dark': black,
+  'bi-bg-light': white,
+  'bi-charcoal': #414141,
+  'bi-muted': rgba(150, 150, 150, 1),
+  'clickable-icon-hover': $warning,
+  'clickable-icon-hover-text': black,
+  'clickable-icon-hover-bg': $warning,
+  'bg-purple-hover': #8b8cd6,
+  'bi-card-bg-light': rgba(250, 250, 250, 1),
+  'info-modal-header': $info,
+  'shadow-slight': rgba(150, 150, 150, 0.7),
+  'widget-shadow': rgba(171, 171, 171, 0.75),
+  'blue-dark': #584e95
+);

@@ -1,0 +1,83 @@
+{
+  "name": "demo-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "dependencies": {
+    "@loadable/component": "^5.7.0",
+    "axios": "^0.18.0",
+    "buidl-storage": "^0.1.1",
+    "buidl-utils": "^0.1.1",
+    "ethers": "^4.0.40",
+    "jwt-decode": "^2.2.0",
+    "react-ga": "^2.7.0",
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^5.0.0",
+    "react-toastify": "^5.3.2",
+    "react-tooltip": "^3.11.2",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "reduxsauce": "^1.0.1",
+
+
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-brands-svg-icons": "^5.11.2",
+    "@fortawesome/free-regular-svg-icons": "^5.11.2",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/react-fontawesome": "^0.1.7",
+    "@monaco-editor/react": "^2.3.0",
+    "@react-workspaces/react-scripts": "3.4.0",
+    "animate.css": "^3.7.2",
+    "bootstrap": "^4.3.1",
+    "chart.js": "^2.9.3",
+    "classnames": "^2.2.6",
+    "copy-to-clipboard": "^3.2.0",
+    "cross-env": "^6.0.3",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "font-awesome": "^4.7.0",
+    "moment": "^2.24.0",
+    "monaco-editor": "^0.18.1",
+    "node-sass": "^4.13.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.8.6",
+    "react-autosuggest": "^9.4.3",
+    "react-chartjs-2": "^2.8.0",
+    "react-chartkick": "^0.4.0",
+    "react-dom": "^16.8.6",
+    "react-json-tree": "^0.11.2",
+    "react-loadable": "^5.5.0",
+    "react-markdown": "^4.2.2",
+    "react-mde": "^7.6.2",
+    "react-select": "^3.0.8",
+    "react-sparklines": "^1.7.0",
+    "react-step-wizard": "^5.3.0",
+    "react-toggle": "^4.1.1",
+    "reactstrap": "^8.1.1",
+    "showdown": "^1.9.1"
+  },
+  "scripts": {
+    "start": "NODE_PATH=src SASS_PATH=node_modules:src/scss react-scripts start",
+    "build": "NODE_PATH=src SASS_PATH=node_modules:src/scss react-scripts build",
+    "test": "react-scripts test",
+    "lint": "eslint ./src/**/*.js --max-warnings=0 --format=codeframe"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "redux-logger": "^3.0.6"
+  }
+}

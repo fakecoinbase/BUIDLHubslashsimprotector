@@ -1,0 +1,338 @@
+//@import "mixins";
+
+/* SCREEN SIZES */
+
+// Smart phones (portrait view)
+$screen-xs-min: 0px;
+// Small tablets and large smartphones (landscape view)
+$screen-sm-min: 576px;
+// Small tablets (portrait view)
+$screen-md-min: 768px;
+// Tablets and small desktops (includes Macbooks)
+$screen-lg-min: 992px;
+// Large tablets and desktops (bigger displays)
+$screen-xl-min: 1300px;
+
+// Xtrasmall devices
+@mixin xs {
+  @media (min-width: #{$screen-xs-min}) {
+    @content;
+  }
+}
+
+// Small devices
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+    @content;
+  }
+}
+
+// Medium devices
+@mixin md {
+  @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+
+// Large devices
+@mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
+
+// Xtralarge devices
+@mixin xl {
+  @media (min-width: #{$screen-xl-min}) {
+    @content;
+  }
+}
+
+@import 'variables';
+@import '../Views/Views';
+
+
+@-ms-viewport {
+  width: device-width;
+}
+
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background: theme-color('main-bg');
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.lh-1 {
+  line-height: 1em;
+}
+
+.flex-grow {
+  flex: 1 0 auto;
+}
+
+.text-muted {
+  color: theme-color('text-muted') !important;
+}
+
+.text-bold {
+  font-weight: 600;
+}
+
+.text-sz-tiny {
+  font-size: 0.8em;
+}
+
+.text-sz-md {
+  font-size: 20px;
+}
+
+.text-sz-lg {
+  font-size: 1.5em;
+}
+
+.text-sz-sm {
+  font-size: 12px;
+}
+
+.text-sz-xsm {
+  font-size: 0.6em;
+}
+
+.text-sz-hero {
+  font-size: 8em;
+}
+
+.text-1 {
+  font-size: 1em;
+}
+
+.text-1-2 {
+  font-size: 1.2em;
+}
+
+.text-1-5 {
+  font-size: 1.5em;
+}
+
+.text-2 {
+  font-size: 2em;
+}
+
+.text-3 {
+  font-size: 3em;
+}
+
+.text-4 {
+  font-size: 4em;
+}
+
+.text-5 {
+  font-size: 5em;
+}
+
+.shift-left-5 {
+  margin-left: -5%;
+}
+
+.shift-left-10 {
+  margin-left: -10%;
+}
+
+.shift-left-15 {
+  margin-left: -15%;
+}
+
+.shift-left-20 {
+  margin-left: -20%;
+}
+
+.shift-right-5 {
+  margin-left: 5%;
+}
+
+.shift-right-10 {
+  margin-left: 10%;
+}
+
+.shift-right-15 {
+  margin-left: 15%;
+}
+
+.shift-right-20 {
+  margin-left: 20%;
+}
+
+.w-40 {
+  width: 40%;
+}
+.w-45 {
+  width: 45%;
+}
+
+.w-55 {
+  width: 55%;
+}
+
+.w-60 {
+  width: 60%;
+}
+
+.w-65 {
+  width: 65%;
+}
+
+.w-70 {
+  width: 70%;
+}
+
+.w-75 {
+  width: 75%;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.w-85 {
+  width: 85%;
+}
+
+.w-90 {
+  width: 90%;
+}
+
+.w-95 {
+  width: 95%;
+}
+
+.bg-attention-success {
+  background: rgba(180, 245, 164, 0.5) !important;
+}
+
+.border-2 {
+  border-width: 2px !important;
+}
+
+.rounded-10 {
+  border-radius: 10px;
+}
+
+.rounded-5 {
+  border-radius: 5px;
+}
+
+.clickable-icon {
+  cursor: pointer;
+
+  &:hover {
+    //font-size: 1.2em;
+    color: theme-color('clickable-icon-hover');
+  }
+}
+
+//override bg-dark to make color light
+.bg-dark {
+  color: $white !important;
+}
+
+.disabled-icon {
+  cursor: default;
+  color: theme-color('disabled');
+}
+
+.circle-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /*color: theme-color("tellor-text-dark") !important;*/
+  border: 1px solid theme-color('dark-border');
+  border-radius: 50%;
+  background: theme-color('tellor-bg-light');
+  min-height: 20px;
+  min-width: 20px;
+  max-height: 30px;
+  max-width: 30px;
+
+  &:hover {
+    cursor: pointer;
+    color: white !important;
+    background: theme-color('bg-purple-hover');
+  }
+}
+
+/* #################################################### */
+/* Mitchell's Custom CSS */
+
+.showmewhatyouvegot {
+  border: 1px solid black;
+}
+
+.centerthisdiv {
+  align-content: center !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  justify-content: center !important;
+  justify-items: center !important;
+}
+
+.bg_section {
+  width: 100% !important;
+  height: auto;
+}
+
+.center_width {
+  @include md() {
+    max-width: 60vw;
+  }
+}
+
+/* #################################################### */
+/* Modifies side scrollbar */
+
+/**** TAKING OUT FOR NOW. It makes things push left at odd times
+body::-webkit-scrollbar {
+  @include sm() {
+    width: 0.85rem;
+  }
+  @include md() {
+    width: 0.9rem;
+  }
+  @include lg() {
+    width: 1.1rem;
+  }
+  @include xl() {
+    width: 1.25rem;
+  }
+}
+
+body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(30, 33, 43, 0.763);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(to bottom, $gray-900, $gray-700);
+  // outline: 1px solid slategrey;
+}
+
+@media screen and (max-width: 768px) {
+  body::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+*/
