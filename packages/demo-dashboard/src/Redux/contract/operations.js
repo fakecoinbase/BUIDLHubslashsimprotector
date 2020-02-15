@@ -4,14 +4,14 @@ import abi from 'Constants/abi/SimProtector.json';
 import {ethers} from 'ethers';
 
 
-const ROPSTEN_ADDR = "0xAA92f0E922ea64912DE454048deF8D3274260f47";
+const ADDR = "0xe345Ef5532B82db821DEa89E2ED5a5CF689583e3";
 
 const init = () => async dispatch => {
     try {
         dispatch(Creators.initStart());
         //TODO: swap out provider for L2 provider
-        let provider = ethers.getDefaultProvider('ropsten');
-        let con = new ethers.Contract(ROPSTEN_ADDR, abi.abi, provider);
+        let provider = ethers.getDefaultProvider('rinkeby');
+        let con = new ethers.Contract(ADDR, abi.abi, provider);
         dispatch(Creators.initSuccess({
             contract: con,
             provider: provider,

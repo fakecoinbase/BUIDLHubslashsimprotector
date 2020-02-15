@@ -1,6 +1,6 @@
 
 export const tryCall = (fn, ...args) => {
     if(typeof fn === 'function') {
-        fn(...args);
+        return fn(...args);
     }
 }
