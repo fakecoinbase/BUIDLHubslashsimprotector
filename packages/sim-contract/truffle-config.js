@@ -1,4 +1,7 @@
 const path = require("path");
+const ArbProvider = require("arb-provider-truffle");
+const mnemonic =
+  "jar deny prosper gasp flush glass core corn alarm treat leg smart";
 
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
@@ -7,6 +10,21 @@ module.exports = {
   networks: {
     develop: {
       port: 8545
+    },
+    arbitrum: {
+      provider: function() {
+        if (!this.provider.prov) {
+          this.provider.prov = ArbProvider.provider(
+            __dirname,
+            "build/contracts",
+            {
+              mnemonic: mnemonic
+            }
+          );
+        }
+        return this.provider.prov;
+      },
+      network_id: "*"
     }
   }
 };
