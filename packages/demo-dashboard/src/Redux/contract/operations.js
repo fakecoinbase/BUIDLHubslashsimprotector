@@ -14,7 +14,8 @@ const init = () => async dispatch => {
         let con = new ethers.Contract(ROPSTEN_ADDR, abi.abi, provider);
         dispatch(Creators.initSuccess({
             contract: con,
-            provider: provider
+            provider: provider,
+            abi: abi.abi
         }));
     } catch (e) {
         console.log(e);

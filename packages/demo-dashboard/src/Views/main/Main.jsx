@@ -2,35 +2,10 @@ import cn from 'classnames';
 import * as align from 'Constants/alignments';
 import { Row, Col } from 'reactstrap';
 import React, { Component } from 'react'
-import {tryCall} from 'Utils';
 import QRReader from 'Components/QRReader';
 
 export default class MainView extends Component {
-    static getDerivedStateFromProps(props, state) {
-        if(state.requestedInit) {
-            return {}
-        }
     
-        setTimeout(() => tryCall(props.runInit), 10);
-        return {
-            requestedInit: true
-        }
-    }
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            requestedInit: false 
-        }
-    }
-
-    componentDidMount = () => {
-        if(!this.state.requestedInit) {
-            this.setState({
-                requestedInit: true
-            }, () => tryCall(this.props.runInit));
-        }
-    }
 
     /***
      * <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>

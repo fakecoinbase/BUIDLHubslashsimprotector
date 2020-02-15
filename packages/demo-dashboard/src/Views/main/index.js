@@ -1,6 +1,5 @@
 import {connect} from 'react-redux';
 import View from './Main';
-import {default as initOps} from 'Redux/init/operations';
 
 const s2p = state => {
     return {
@@ -9,9 +8,7 @@ const s2p = state => {
 
  const d2p = dispatch => { 
      return {
-        runInit: () => {
-            dispatch(initOps.start());
-        }
+        
     } 
 } 
 

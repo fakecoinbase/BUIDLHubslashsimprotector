@@ -4,7 +4,8 @@ import {createReducer} from 'reduxsauce';
 const INIT = {
     loading: false,
     instance: null,
-    provider: null
+    provider: null,
+    abi: []
 }
 
 const start = (state=INIT) => {
@@ -19,6 +20,7 @@ const success = (state=INIT, action) => {
         ...state,
         instance: action.contract.contract,
         provider: action.contract.provider,
+        abi: action.contract.abi,
         loading: false
     }
 }
