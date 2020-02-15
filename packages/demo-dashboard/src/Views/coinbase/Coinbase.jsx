@@ -4,6 +4,7 @@ import { Row, Col } from 'reactstrap';
 import React, { Component } from 'react'
 import StepWizard from 'Components/StepWizard';
 
+
 export default class Coinbase extends Component {
     render() {
         let steps = [
@@ -12,12 +13,16 @@ export default class Coinbase extends Component {
             }
         ]
 
+        
+        
+
         return (
             <div className={cn("cb-container", align.full, align.topCenter, align.noMarginPad)}>
                 <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
                     <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
                         
                         <TitleSection className={cn("pt-5")} />
+
 
                     </Col>
                 </Row>
