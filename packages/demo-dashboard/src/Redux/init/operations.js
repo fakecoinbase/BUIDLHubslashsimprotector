@@ -2,10 +2,16 @@ import {Creators} from './actions';
 
 import {default as storageOps} from 'Redux/storage/operations';
 import {default as conOps} from 'Redux/contract/operations';
+import {default as walletOps} from 'Redux/wallet/operations';
 
 const initStorage = props => {
   return props.dispatch(storageOps.init())
       .then(()=>props)
+}
+
+const initWallet = props => {
+  return props.dispatch(walletOps.init())
+    .then(() => props);
 }
 
 const initContract = props => {
@@ -28,6 +34,7 @@ const _doStart = () => (dispatch,getState) => {
     getState
   }
   return initStorage(props)
+        .then(initWallet)
         .then(initContract)
         .then(()=>{
           dispatch(Creators.initSuccess());
