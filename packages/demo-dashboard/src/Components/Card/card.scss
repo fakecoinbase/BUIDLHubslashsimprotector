@@ -1,0 +1,61 @@
+.card-dimensions {
+  min-width: 55vw !important;
+  min-height: 65vh !important;
+}
+
+.card-header {
+  background: $blue;
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  color: $white;
+  font-size: 2.5rem;
+}
+
+.card-text {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: $gray-600;
+  font-size: 1.5rem;
+}
+
+.param-modal {
+  margin-top: 5% !important;
+  overflow: visible !important;
+}
+
+.param-modal-header {
+  background: $primary;
+
+  .param-modal-header-text {
+    color: $white !important;
+    font-weight: 600 !important;
+  }
+
+  .param-modal-header-subtitle {
+    color: $white !important;
+  }
+}
+
+.param-modal-body {
+  background: $gray-200 !important;
+  max-height: 500px !important;
+  overflow: auto !important;
+  z-index: 5000 !important;
+
+  .enum-select-container {
+    position: relative !important;
+  }
+  .Select-menu-outer {
+    position: relative !important;
+  }
+
+  input {
+    width: 100% !important;
+    border-radius: 3px !important;
+    background: $white !important;
+  }
+}
+
+.param-modal-footer {
+  background: $gray-200 !important;
+}
