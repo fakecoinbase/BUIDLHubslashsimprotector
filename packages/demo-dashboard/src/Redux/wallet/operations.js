@@ -42,6 +42,15 @@ const init = () => async dispatch => {
     }
 }
 
+const sign = data => async (dispatch, getState) => {
+    try {
+        return await getState().wallet.instance.signMessage
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 export default {
-    init
+    init,
+    sign
 }

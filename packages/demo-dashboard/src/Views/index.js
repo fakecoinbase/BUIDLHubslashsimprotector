@@ -11,6 +11,7 @@ import { Redirect, Route,Switch ,withRouter} from "react-router-dom";
 import error from "Routes/error";
 import MainRoute from "Routes/main";
 import MfrRoute from 'Routes/manufacturer';
+import CoinbaseRoute from 'Routes/coinbase';
 import {default as initOps} from 'Redux/init/operations';
 import {tryCall} from 'Utils';
 
@@ -57,7 +58,7 @@ class AppStart extends Component {
     }
 /**
  *
-              
+      <Route path={`${match.url}manufacturer`} component={MfrRoute} />        
  */
         
     return (
@@ -66,7 +67,8 @@ class AppStart extends Component {
           <Loading loading={this.props.showing} />
           <Switch>
               <Route path={`${match.url}main`} component={MainRoute} />
-              <Route path={`${match.url}manufacturer`} component={MfrRoute} />
+              <Route path={`${match.url}coinbase`} component={CoinbaseRoute} />
+              
               
               <Route path={`/error`} component={error} />
               <Redirect to="/error" />

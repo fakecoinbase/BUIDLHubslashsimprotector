@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
 import View from './Manufacturer';
 import {ethers} from 'ethers';
+import {default as walletOps} from 'Redux/wallet/operations';
 import _ from 'lodash';
 
 const s2p = state => {
@@ -25,6 +26,8 @@ const s2p = state => {
             console.log("FN", fn);
 
             let data = fn.encode(params);
+            let sig = dispatch(walletOps.sign(data));
+            
             console.log("ENCO", data);
             //TODO: sign with ephemeral wallet 
 

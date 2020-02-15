@@ -56,14 +56,18 @@ export default class StepWizardContainer extends Component {
 
     render() {
         
-        const {
+        let {
             stepMeta
         } = this.props;
+        if(!stepMeta) {
+            stepMeta = []
+        }
 
         let page = this.state.page;
-        let meta = stepMeta[page];
+        let meta = stepMeta[page] || {};
+        let title = meta.title;
         let dirty = meta.dirty;
-        let hasNext = page < (stepMeta.length - 1) && !dirty;
+        let hasNext = page < (stepMeta.length - 1);
         let hasPrev = page > 0;
 
         return (
@@ -71,13 +75,17 @@ export default class StepWizardContainer extends Component {
                 <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
                     <Col xs="10" className={cn(align.allCenter, align.noMarginPad)}>
                         <Card className={cn("step-card", align.full, align.noMarginPad)}>
-                            <CardHeader className={cn(align.full, "step-header")}>
-                                <div className={cn(align.full, align.leftCenter, align.noMarginPad)}>
-                                    <span className={cn('font-weight-bold', 'text-1')}>
-                                        {meta.title}
-                                    </span>
-                                </div>
-                            </CardHeader>
+
+                            {
+                                title &&
+                                <CardHeader className={cn(align.full, "step-header")}>
+                                    <div className={cn(align.full, align.leftCenter, align.noMarginPad)}>
+                                        <span className={cn('font-weight-bold', 'text-1')}>
+                                            {meta.title}
+                                        </span>
+                                    </div>
+                                </CardHeader>
+                            }
 
 
                             <CardBody className={cn("step-body", align.full, align.noMarginPad)}>
