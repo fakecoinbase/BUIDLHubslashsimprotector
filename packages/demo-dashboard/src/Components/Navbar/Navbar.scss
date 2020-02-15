@@ -1,0 +1,184 @@
+.navbar_container {
+  //   background-color: $bhub-off-black;
+
+  .top {
+    top: 0px;
+  }
+
+  .nav_style {
+    padding: 0;
+    top: 0px;
+  }
+
+  .nav-margin-fix {
+    @include md() {
+      margin-top: -0.5rem;
+      margin-bottom: -1.5rem;
+    }
+  }
+
+  .nav_collapse_style {
+    display: flex;
+    @include xs() {
+      justify-content: space-evenly;
+      flex: column !important;
+    }
+    @include md() {
+      justify-content: center;
+      flex: row !important;
+    }
+  }
+
+  .nav-right-margin-fix {
+    @include md() {
+      margin-top: 0rem !important;
+    }
+  }
+
+  .nav-link-placement {
+    @include md() {
+      margin-top: 0.7rem;
+    }
+  }
+
+  .nav_toggler_collapse_style {
+    display: flex;
+    @include xs() {
+      flex: column !important;
+      justify-content: flex-start;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      margin-left: 1rem;
+      padding-left: 1rem;
+    }
+  }
+
+  .w-100-important {
+    max-width: 100vw !important;
+    overflow: hidden !important;
+  }
+
+  .nav_items_collapse_style {
+    @include xs() {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .nav_logo {
+    @include xs() {
+      max-width: 10vw;
+      margin-right: 1rem;
+      margin-left: -3rem;
+      margin-bottom: -3rem;
+      margin-top: -2rem;
+    }
+    @include sm() {
+      max-width: 8vw;
+    }
+    @include md() {
+      max-width: 5.5vw;
+    }
+    @include lg() {
+      max-width: 3.5vw;
+      margin-right: 20px;
+      margin-bottom: 0rem;
+      margin-top: -0.7rem;
+    }
+  }
+
+  .nav_brand {
+    color: $white;
+    // font-family: 'Arial', sans-serif;
+    font-weight: 800;
+    align-content: center;
+    @include xs() {
+      font-size: 1.5rem;
+      margin-top: -1.5rem;
+    }
+    @include lg() {
+      // margin-right: 10rem;
+      font-size: 2rem;
+      margin-bottom: 0;
+    }
+    //   @include xl() {
+    //     font-size: 2.75rem;
+    //   }
+  }
+
+  .nav_brand_span {
+    color: $gold-dark;
+  }
+
+  .nav_brand_invisible {
+    color: #363636;
+  }
+
+  .nav_link {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    color: $black;
+    @include xs() {
+      font-size: 1.1rem;
+    }
+    transition: color 0.3s ease-out;
+  }
+
+  .nav_link:hover {
+    text-decoration: none;
+    color: $gray-600;
+    transition: color 0.3s ease-out;
+  }
+
+  .nav_link:active {
+    color: $gray-400;
+  }
+
+  .nav_button {
+    margin-left: 10px;
+    background-color: $gold-dark;
+    color: $black;
+    @include xs() {
+      margin-left: 0rem;
+    }
+    @include md() {
+      // padding-left: 10px;
+      // padding-right: 10px;
+      margin-left: 4rem;
+      min-width: 130px;
+    }
+    transition: background-color 0.3s;
+  }
+
+  .nav_button:hover {
+    background-color: $gold-light;
+    color: $black;
+    transition: background-color 0.3s;
+  }
+}
+
+.logo_positioned {
+  @include xs() {
+    justify-content: center;
+    align-items: center;
+  }
+
+  @include sm() {
+    justify-content: center;
+    align-items: center;
+  }
+
+  @include md() {
+    justify-content: start;
+    align-items: center;
+  }
+
+  @include lg() {
+    justify-content: start;
+    align-items: center;
+  }
+
+  @include xl() {
+    justify-content: start;
+    align-items: center;
+  }
+}

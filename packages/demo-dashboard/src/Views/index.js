@@ -10,6 +10,9 @@ import { connect } from "react-redux";
 import { Redirect, Route,Switch ,withRouter} from "react-router-dom";
 import error from "Routes/error";
 import MainRoute from "Routes/main";
+import MfrRoute from 'Routes/manufacturer';
+import {default as initOps} from 'Redux/init/operations';
+import {tryCall} from 'Utils';
 
 import cn from 'classnames';
 import * as align from 'Constants/alignments';
@@ -19,6 +22,33 @@ import Loading from "Components/Loading"
 const DEF_START = "/main"
 
 class AppStart extends Component {
+
+  static getDerivedStateFromProps(props, state) {
+    if(state.requestedInit) {
+        return {}
+    }
+
+    setTimeout(() => tryCall(props.runInit), 10);
+      return {
+          requestedInit: true
+      }
+  }
+
+  constructor(props) {
+      super(props);
+      this.state = {
+          requestedInit: false 
+      }
+  }
+
+  componentDidMount = () => {
+      if(!this.state.requestedInit) {
+          this.setState({
+              requestedInit: true
+          }, () => tryCall(this.props.runInit));
+      }
+  }
+
   
   render() {
     const { location, match } = this.props;
@@ -36,6 +66,7 @@ class AppStart extends Component {
           <Loading loading={this.props.showing} />
           <Switch>
               <Route path={`${match.url}main`} component={MainRoute} />
+              <Route path={`${match.url}manufacturer`} component={MfrRoute} />
               
               <Route path={`/error`} component={error} />
               <Redirect to="/error" />
@@ -54,7 +85,9 @@ const s2p = state => {
 
 const d2p = dispatch => {
   return {
-    
+    runInit: () => {
+      dispatch(initOps.start());
+    }
   }
 }
 
