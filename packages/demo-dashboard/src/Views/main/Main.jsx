@@ -98,7 +98,7 @@ export default class MainView extends Component {
 
         <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
           <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
-            <Navigation />
+            <Navigation goTo={this.props.goTo}/>
           </Col>
           <Col xs="8" className={cn(align.allCenter, align.noMarginPad)}>
             <StepWizard stepMeta={steps} onNext={this.handleNextStep}>

@@ -66,7 +66,7 @@ export default class Coinbase extends Component {
         )}
       >
         <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
-          <Navigation />
+          <Navigation goTo={this.props.goTo}/>
         </Col>
         <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
           <Col xs="4" className={cn(align.allCenter, align.noMarginPad)}>

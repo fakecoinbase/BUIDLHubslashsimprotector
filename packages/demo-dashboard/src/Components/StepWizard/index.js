@@ -71,10 +71,13 @@ export default class StepWizardContainer extends Component {
   }
 
   render() {
-    const { stepMeta, noButtons, lightIndicator } = this.props;
+    let { stepMeta, noButtons, lightIndicator } = this.props;
+    if(!stepMeta) {
+      stepMeta = [];
+    }
 
     let page = this.state.page;
-    let meta = stepMeta[page];
+    let meta = stepMeta[page] || {};
     let dirty = meta.dirty;
     let nextTitle = meta.nextTitle;
     let hasNext = page < stepMeta.length - 1 && !dirty;

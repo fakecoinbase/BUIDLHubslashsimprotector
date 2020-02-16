@@ -15,6 +15,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from "reactstrap";
+import {tryCall} from 'Utils';
 import React, { Component } from "react";
 import LogoBlock from "./LogoBlock/Coinbase";
 
@@ -78,9 +79,10 @@ export default class Navigation extends React.Component {
                   "nav_items_collapse_style"
                 )}
               >
-                <a className={cn("nav_link_coinbase")} href="/main">
+                <span className={cn("nav_link_coinbase")} 
+                      onClick={()=>tryCall(this.props.goTo, '/main')}>
                   1. Telco Trusted Customer
-                </a>
+                </span>
               </NavItem>
               <NavItem
                 className={cn(
@@ -89,9 +91,10 @@ export default class Navigation extends React.Component {
                   "nav_items_collapse_style"
                 )}
               >
-                <a className={cn("nav_link_coinbase")} href="/coinbase">
+                <span className={cn("nav_link_coinbase")} 
+                      onClick={()=>tryCall(this.props.GoTo, '/coingbase')}>
                   2. Custodian Wallet
-                </a>
+                </span>
               </NavItem>
               
             </Nav>

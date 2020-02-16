@@ -16,6 +16,7 @@ export default class Step3 extends React.Component {
             lastEvent
         }= this.props;
         if(!lastEvent) {
+
             return null;
         }
 
@@ -67,6 +68,7 @@ export default class Step3 extends React.Component {
                 </span>
                 </Col>
             </Row>
+
             
             </div>
         );
