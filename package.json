@@ -22,6 +22,7 @@
     "shipit-deploy": "^4.1.1"
   },
   "dependencies": {
+    "arb-provider-truffle": "^0.3.3",
     "babel-eslint": "10.0.1",
     "eslint": "5.16.0",
     "eslint-config-prettier": "^4.2.0",
