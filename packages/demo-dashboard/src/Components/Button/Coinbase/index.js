@@ -20,8 +20,9 @@ export default class ButtonConfirm extends React.Component {
       <Fragment>
         <Button
           size={size}
+          color="primary"
           onClick={this.props.onClick}
-          className={cn(className, "button-coinbase")}
+          className={className}
         >
           {this.props.children}
         </Button>

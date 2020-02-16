@@ -18,6 +18,20 @@ export default class Coinbase extends Component {
       dirty: false,
       loading: false
     };
+
+    this.wizardRef = React.createRef();
+  }
+
+  forgot = () => {
+    if(this.wizardRef.current) {
+      this.wizardRef.current.next();
+    }
+  }
+
+  reset = () => {
+    if(this.wizardRef.current) {
+      this.wizardRef.current.next();
+    }
   }
 
   render() {
@@ -39,6 +53,9 @@ export default class Coinbase extends Component {
       }
     ];
 
+    /***
+     * 
+     */
     return (
       <div
         className={cn(
@@ -52,13 +69,14 @@ export default class Coinbase extends Component {
           <Navigation />
         </Col>
         <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
-          <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
-            {/* <TitleSection stepMeta={steps} className={cn("pt-5")} /> */}
-            <StepWizard stepMeta={steps}>
-              <CoinbaseStep1 />
-              <CoinbaseStep2 />
+          <Col xs="4" className={cn(align.allCenter, align.noMarginPad)}>
+            
+          <StepWizard ref={this.wizardRef} stepMeta={steps} noButtons noHeader>
+              <CoinbaseStep1 forgot={this.forgot} />
+              <CoinbaseStep2 reset={this.reset} />
               <CoinbaseStep3 />
             </StepWizard>
+            
           </Col>
         </Row>
       </div>

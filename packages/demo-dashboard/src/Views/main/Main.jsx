@@ -136,7 +136,7 @@ export default class MainView extends Component {
       }
     ];
     return (
-      <div className={cn(align.full, align.topCenter, align.noMarginPad)}>
+      <div className={cn("main-start", align.full, align.topCenter, align.noMarginPad)}>
         <Loading loading={this.state.loading} />
 
         <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
@@ -151,7 +151,7 @@ export default class MainView extends Component {
                 className={cn(align.full, align.allCenter, align.noMarginPad)}
               >
                 <Row
-                  className={cn(align.full, align.noMarginPad, align.allCenter)}
+                  className={cn(align.full, align.noMarginPad, align.topCenter)}
                 >
                   <Col
                     xs="12"
@@ -163,20 +163,30 @@ export default class MainView extends Component {
                   </Col>
                   <Col
                     xs="12"
-                    className={cn(align.allCenter, align.noMarginPad)}
+                    className={cn(align.allCenter, "py-3", align.noMarginPad)}
                   >
-                    <InputField label="some label" placeholder="customer wallet" 
+                    <InputField label="Customer Wallet" placeholder="customer wallet" 
                         value={this.state.data.address || ''}
                         onChange={e=>this.fieldChanged('address', e.target.value)}/>
                   </Col>
                   <Col
                     xs="12"
-                    className={cn(align.allCenter, align.noMarginPad)}
+                    className={cn(align.allCenter, "py-3", align.noMarginPad)}
                   >
-                    <InputField label="some label" placeholder="Phone Number" 
+                    <InputField label="Customer Phone Number" placeholder="Phone Number" 
                         value={this.state.data.phoneNumber || ''}
                         onChange={e=>this.fieldChanged("phoneNumber", e.target.value)}/>
                   </Col>
+
+                  <Col
+                    xs="12"
+                    className={cn(align.allCenter, "py-3", align.noMarginPad)}
+                  >
+                    <InputField label="New SIM ID" placeholder="SIM ID" 
+                        value={this.state.data.simID || ''}
+                        onChange={e=>this.fieldChanged("simID", e.target.value)}/>
+                  </Col>
+
                   <Col
                     xs="12"
                     className={cn(align.allCenter, align.noMarginPad)}

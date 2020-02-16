@@ -6,4 +6,20 @@
         color: $white;
         font-family: monospace;
     }
+
+
+    .step {
+        border-radius: 3px;
+        background: $white;
+    
+
+        input {
+            border-radius: 0;
+        }
+
+        button {
+            border-radius: 0;
+        }
+    }
+
 }

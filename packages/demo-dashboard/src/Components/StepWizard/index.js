@@ -58,47 +58,43 @@ export default class StepWizardContainer extends Component {
   };
 
   render() {
-    const { stepMeta } = this.props;
+    const { stepMeta, noButtons, noHeader } = this.props;
 
     let page = this.state.page;
     let meta = stepMeta[page];
     let dirty = meta.dirty;
     let nextTitle = meta.nextTitle;
-    let nextColor = meta.nextColor;
     let hasNext = page < stepMeta.length - 1 && !dirty;
     let hasPrev = page > 0;
 
     return (
-      <div className={cn(align.full, align.allCenter, align.noMarginPad)}>
-        <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
-          <Col
-            xs="10"
-            className={cn(align.allCenter, align.noMarginPad, "param-modal")}
-          >
+      
             <Card
               className={cn(
                 "step-card",
-                "card-dimensions",
                 align.full,
                 align.noMarginPad
               )}
             >
-              <CardHeader
-                className={cn(align.full, "step-header", "card-header")}
-              >
-                <div
-                  className={cn(
-                    align.full,
-                    align.leftCenter,
-                    align.noMarginPad
-                  )}
-                >
-                  <span className={cn("font-weight-bold", "text-1")}>
-                    {/* {meta.title} */}
-                    {this.props.header}
-                  </span>
-                </div>
-              </CardHeader>
+              {
+                !noHeader &&
+                  <CardHeader
+                    className={cn(align.full, "step-header", "card-header")}
+                  >
+                    <div
+                      className={cn(
+                        align.full,
+                        align.leftCenter,
+                        align.noMarginPad
+                      )}
+                    >
+                      <span className={cn("font-weight-bold", "text-1")}>
+                        {/* {meta.title} */}
+                        {this.props.header}
+                      </span>
+                    </div>
+                  </CardHeader>
+                }
 
               <CardBody
                 className={cn("step-body", align.full, align.noMarginPad)}
@@ -108,40 +104,39 @@ export default class StepWizardContainer extends Component {
                 </StepWizard>
               </CardBody>
 
-              <CardFooter
-                className={cn(align.full, align.rightCenter, align.noMarginPad)}
-              >
-                <Row
-                  className={cn(align.full, align.noMarginPad, align.allCenter)}
-                >
-                  <Col
-                    xs="6"
-                    className={cn(align.leftCenter, align.noMarginPad)}
-                  >
-                    <ButtonPrevious
-                      size="sm"
-                      color={hasPrev ? "primary" : "secondary"}
-                      onClick={this.prev}
-                      disabled={!hasPrev}
-                    >
-                      Prev
-                    </ButtonPrevious>
-                  </Col>
+                  {!noButtons &&
+                        <CardFooter
+                          className={cn(align.full, align.rightCenter, align.noMarginPad)}
+                        >
+                          <Row
+                            className={cn(align.full, align.noMarginPad, align.allCenter)}
+                          >
+                            <Col
+                              xs="6"
+                              className={cn(align.leftCenter, align.noMarginPad)}
+                            >
+                              <ButtonPrevious
+                                size="sm"
+                                color={hasPrev ? "primary" : "secondary"}
+                                onClick={this.prev}
+                                disabled={!hasPrev}
+                              >
+                                Prev
+                              </ButtonPrevious>
+                            </Col>
 
-                  <Col
-                    xs="6"
-                    className={cn(align.rightCenter, align.noMarginPad)}
-                  >
-                    <ButtonProgress onClick={this.next} disabled={!hasNext}>
-                      {nextTitle || "Next"}
-                    </ButtonProgress>
-                  </Col>
-                </Row>
-              </CardFooter>
+                            <Col
+                              xs="6"
+                              className={cn(align.rightCenter, align.noMarginPad)}
+                            >
+                              <ButtonProgress onClick={this.next} disabled={!hasNext}>
+                                {nextTitle || "Next"}
+                              </ButtonProgress>
+                            </Col>
+                          </Row>
+                        </CardFooter>
+                }
             </Card>
-          </Col>
-        </Row>
-      </div>
     );
   }
 }
