@@ -138,6 +138,18 @@ const MainPage = props => {
     ins = selectedFn.inputs;
   }
 
+   const registerPhoneNumber = () => {
+     tryCall(
+       props.registerPhoneNumber,
+       "123456",
+       "0x803428e38DBFDf2EB25D94B538A1CFc395E66615"
+     );
+   };
+
+   const addProvider = () => [
+     tryCall(props.addProvider, "0x803428e38DBFDf2EB25D94B538A1CFc395E66615")
+   ];
+
   return (
     <div className={cn(align.full, align.topCenter, align.noMarginPad)}>
       <Loading loading={loading} />

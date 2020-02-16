@@ -1,126 +1,90 @@
-import {Creators} from "./actions";
-import {default as toastr} from 'Redux/toastr/operations';
-import abi from 'Constants/abi/SimProtector.json';
-import {ethers} from 'ethers';
+import { Creators } from "./actions";
+import { default as toastr } from "Redux/toastr/operations";
+import abi from "Constants/abi/SimProtector.json";
+import { ethers } from "ethers";
+import { ArbProvider } from "arb-provider-ethers";
 
-
-const ROPSTEN_ADDR = "0xAA92f0E922ea64912DE454048deF8D3274260f47"
-const RINKEBY_ADDR = "0xe345Ef5532B82db821DEa89E2ED5a5CF689583e3";
+// const ADDR = "0xebb10aadcfe3903a474dda106cffa597794b7a66"; // full rinkeby
+const ADDR = "0x895521964D724c8362A36608AAf09A3D7d0A0445"; // arbitrum
+// const ADDR = "0xdd03704a1d8540b12889a7837161127632c21c14"; // rollup
 
 const init = () => async dispatch => {
-    try {
-        dispatch(Creators.initStart());
-        if(typeof global.web3 === 'undefined') {
-            dispatch(toastr.error("No web3 provider found in environment"));
-            return;
-        }
-        if(typeof global.ethereum === 'undefined') {
-            dispatch(toastr.error("No ethereum provider found in environment"));
-            return;
-        }
+  try {
+    dispatch(Creators.initStart());
+    let arbProvider = new ArbProvider(
+      "http://104.248.9.236:1235",
+      new ethers.providers.Web3Provider(window.ethereum)
+    );
 
-        //TODO: swap out provider for L2 provider
-        
-        const accounts = await global.ethereum.enable();
+    const accounts = await window.ethereum.enable();
+    const signer = arbProvider.getSigner()
+    let con = new ethers.Contract(ADDR, abi.abi, signer);
+    con.connect(signer)
 
-        let provider = new ethers.providers.Web3Provider(global.web3.currentProvider, "ropsten"); //ethers.getDefaultProvider('rinkeby');
-        let block = await provider.getBlockNumber();
-        if(block.toString) {
-            block = block.toString() - 0;
-        }
-        block -= 10000;
-        console.log("Start block", block);
+    dispatch(
+      Creators.initSuccess({
+        contract: con,
+        provider: arbProvider,
+        // provider: provider,
+        abi: abi.abi
+      })
+    );
+  } catch (e) {
+    console.log(e);
+  }
+};
 
-        let con = new ethers.Contract(ROPSTEN_ADDR, abi.abi, provider.getSigner());
-        let ifc = new ethers.utils.Interface(abi.abi);
+const addProvider = address => async (dispatch, getState) => {
+  try {
+    dispatch(Creators.working(true));
+    const contr = await getState().contract.instance;
+    await contr["addProvider(address)"](address);
+    console.log('done')
+  } catch (e) {
+    console.log('add provider err', e);
+    dispatch(toastr.error("Problem adding provider"));
+  }
+};
 
-        let evtDefs = con.interface.events;
-        let regTopic = evtDefs.RegisterPhoneNumber.topic;
-        
-        let events = await provider.getLogs({
-            address: ROPSTEN_ADDR,
-            fromBlock: block,
-            topics: [regTopic]
-        });
-        events = events.map(e=>{
-            let ev = ifc.parseLog(e);
-            let num = ev.values.phoneNumber.toString();
-            let time = ev.values.timestamp.toString()-0;
-            let owner = ev.values.ownerAddress.toString();
-            return {
-                phoneNumber: num,
-                timestamp: time * 1000,
-                owner
-            }
-        });
-        events.sort((a, b)=>b.timestamp-a.timestamp);
+const registerPhoneNumber = (phoneNumber, numberOwner) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch(Creators.working(true));
+    let hashed = ethers.utils.id(phoneNumber);
+    const contr = await getState().contract.instance;
+    contr["registerPhoneNumber(uint256,address)"](hashed, numberOwner);
+    console.log('done')
+    
+  } catch (e) {
+    dispatch(toastr.error("problem register number"));
+  }
+};
 
-        dispatch(Creators.initSuccess({
-            contract: con,
-            provider: provider,
-            events,
-            abi: abi.abi
-        }));
-    } catch (e) {
-        console.log(e);
-    }
-}
+const confirmShutdown = phoneNumber => async (dispatch, getState) => {
+  try {
+    dispatch(Creators.working(true));
+    let hashed = ethers.utils.id(phoneNumber);
+    await getState().contract.instance.confirmShutdown(hashed);
+  } catch (e) {
+    console.log(e);
+    dispatch(toastr.error("problem register number"));
+  }
+};
 
-const addProvider = (address) => async (dispatch, getState) => {
-    try {
-
-        dispatch(Creators.working(true));
-
-        await getState().contract.instance.addProvider(address);
-        
-
-    } catch (e) {
-        console.log(e);
-        dispatch(toastr.error("Problem adding provider"));
-    }
-}
-
-const registerPhoneNumber = (phoneNumber, numberOwner) => async (dispatch, getState) => {
-    try {
-        
-        dispatch(Creators.working(true));
-        let hashed = ethers.utils.id(phoneNumber);
-        
-        let txn = await getState().contract.instance.registerPhoneNumber(hashed, numberOwner);
-        let rec = await txn.wait(1);
-        let event = rec.events[0];
-        
-        dispatch(Creators.lastReceipt(event));
-    } catch (e) {
-        console.log(e);
-        dispatch(toastr.error("problem register number"));
-    }
-}
-
-const confirmShutdown = (phoneNumber) => async (dispatch, getState) => {
-    try {
-        dispatch(Creators.working(true));
-        let hashed = ethers.utils.id(phoneNumber);
-        await getState().contract.instance.confirmShutdown(hashed);
-    } catch (e) {
-        console.log(e);
-        dispatch(toastr.error("problem register number"));
-    }
-}
-
-const registerSimChange = (phoneNumber) => async (dispatch, getState) => {
-    try {
-
-    } catch (e) {
-        console.log(e);
-        dispatch(toastr.error("problem registering sim change"));
-    }
-}
+const registerSimChange = phoneNumber => async (dispatch, getState) => {
+  try {
+  } catch (e) {
+    console.log(e);
+    dispatch(toastr.error("problem registering sim change"));
+  }
+};
 
 export default {
-    init,
-    addProvider,
-    registerPhoneNumber,
-    confirmShutdown,
-    registerSimChange
-}
+  init,
+  addProvider,
+  registerPhoneNumber,
+  confirmShutdown,
+  registerSimChange
+};
