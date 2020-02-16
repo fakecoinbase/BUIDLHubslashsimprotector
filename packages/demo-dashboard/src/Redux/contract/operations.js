@@ -89,7 +89,6 @@ const registerPhoneNumber = (phoneNumber, numberOwner) => async (
     let hashed = ethers.utils.id(phoneNumber);
     const contr = await getState().contract.instance;
     let txn = await contr.functions.registerPhoneNumber(hashed, numberOwner);
-    const ap = getState().contract.provider;
     const r = await txn.wait(); 
     if(r) {
       let evts = r.events || [];
@@ -119,7 +118,10 @@ const confirmShutdown = phoneNumber => async (dispatch, getState) => {
   try {
     dispatch(Creators.working(true));
     let hashed = ethers.utils.id(phoneNumber);
-    await getState().contract.instance.confirmShutdown(hashed);
+    let txn = await getState().contract.instance.functions.confirmShutdown(hashed);
+    const r = await txn.wait(); 
+    console.log("Receipt", r);
+    return r;
   } catch (e) {
     console.log(e);
     dispatch(toastr.error("problem register number"));

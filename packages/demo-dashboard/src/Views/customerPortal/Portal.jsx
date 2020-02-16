@@ -8,7 +8,7 @@ import React, { Component } from 'react'
 import {tryCall} from 'Utils';
 import Loading from 'Components/Loading';
 import Input from 'Components/Card/Input';
-import StepWizard from 'Components/StepWizard';
+import Navigation from "Components/Navbar";
 
 export default class Portal extends Component {
     constructor(props) {
@@ -22,8 +22,10 @@ export default class Portal extends Component {
 
     fieldChanged = (fld, val) => {
         this.setState({
-            ...this.state.data,
-            [fld]: val
+            data: {
+                ...this.state.data,
+                [fld]: val
+            }
         })
     }
     
@@ -32,25 +34,27 @@ export default class Portal extends Component {
         if(!this.state.confirming) {
             this.setState({
                 confirming: !this.state.confirming
-            })
+            });
         } else {
             this.setState({
                 loading: true
             }, async () => {
-                await tryCall(this.props.cancelNumber)
+
+                 await tryCall(this.props.cancelNumber, this.state.data.phone);
+                this.setState({
+                    confirming: false,
+                    loading: false,
+                    confirmation: "Number deactivated"
+                });
             })
         }
     }
     render() {
         return (
-            <div className={cn(align.full, align.topCenter, align.noMarginPad)}>
-                <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
-                    <Col xs="10" className={cn(align.leftCenter, align.noMarginPad)}>
-                        <span className={cn('font-weight-bold', 'text-2')}>
-                            SAFENET
-                        </span>
-                    </Col>
-                </Row>
+            <div className={cn("portal", align.full, align.topCenter, align.noMarginPad)}>
+                <Loading loading={this.state.loading} />
+
+                <Navigation goTo={this.props.goTo} />
 
 
                 <Row className={cn(align.full, "pt-4", "pb-2", align.noMarginPad, align.allCenter)}>
@@ -64,14 +68,26 @@ export default class Portal extends Component {
                 <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
                     <Col xs="10" className={cn(align.leftCenter, align.noMarginPad)}>
 
-                        <StepWizard noButtons lightIndicator>
                                 <RequestShutdown 
+                                        confirming={this.state.confirming}
                                         stateData={this.state.data}
-                                        fieldChanged={this.fieldChanged} />
-                        </StepWizard>
+                                        fieldChanged={this.fieldChanged} 
+                                        doShutdown={this.toggle} />
+                                        
                         
                     </Col>
                 </Row>
+
+                {
+                    this.state.confirmation &&
+                    <Row className={cn(align.full, "pt-3", align.noMarginPad, align.allCenter)}>
+                        <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
+                            <span className={cn('font-weight-bold', 'text-1')}>
+                                {this.state.confirmation}
+                            </span>
+                        </Col>
+                    </Row>
+                }
             </div>
         )
     }
@@ -80,19 +96,42 @@ export default class Portal extends Component {
 const RequestShutdown = props => {
     const {
         fieldChanged,
-        stateData
+        stateData,
+        confirming,
+        doShutdown
     } = props;
+    
+
+    let title = confirming?"Are you sure?":"Deactivate";
 
     return (
         <div className={cn(align.full, align.topCenter, align.noMarginPad)}>
-            <CardHeader className={cn("service-header", align.leftCenter)}>
+            
+
+            <CardHeader className={cn("service-header", align.full, align.leftCenter)}>
                 <span className={cn('font-weight-bold', 'text-1')}>
                     Deactivate Phone Number
                 </span>
             </CardHeader>
-            <Input value={stateData.phone}
+            <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
+                <Col xs="12" className={cn(align.leftCenter, align.noMarginPad)}>
+                        <Input value={stateData.phone || ''}
                                 onChange={e=>fieldChanged('phone', e.target.value)}
                                 placeholder="Phone Number" />
+                </Col>
+            </Row>
+            <Row className={cn(align.full, "py-3", align.noMarginPad, align.allCenter)}>
+                <Col xs="12" className={cn(align.leftCenter, align.noMarginPad)}>
+                    <Button size="sm"
+                            color={confirming?"danger":"primary"}
+                            onClick={doShutdown}>
+                        <span className={cn('font-weight-bold', "text-light", 'text-1')}>
+                            {title}
+                        </span>
+                    </Button>
+                </Col>
+            </Row>
+            
         </div>
     )
 }
