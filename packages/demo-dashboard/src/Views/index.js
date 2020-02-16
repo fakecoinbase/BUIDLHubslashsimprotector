@@ -5,6 +5,7 @@ import 'scss/style.scss'
 import "react-toggle/style.css"
 import "animate.css/animate.min.css";
 
+import { ToastContainer } from 'react-toastify';
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route,Switch ,withRouter} from "react-router-dom";
@@ -65,6 +66,7 @@ class AppStart extends Component {
     
       <div className={cn( "main-view-container", align.topCenter, align.full, align.noMarginPad)}>
           <Loading loading={this.props.showing} />
+          <ToastContainer />
           <Switch>
               <Route path={`${match.url}main`} component={MainRoute} />
               <Route path={`${match.url}coinbase`} component={CoinbaseRoute} />
