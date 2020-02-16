@@ -14,6 +14,7 @@ import React, { Component } from "react";
 import ButtonProgress from "Components/Button/Progress";
 import ButtonPrevious from "Components/Button/Previous";
 
+import StepIndicator from "./StepIndicator";
 import StepWizard from "react-step-wizard";
 
 /**
@@ -67,6 +68,8 @@ export default class StepWizardContainer extends Component {
     let nextColor = meta.nextColor;
     let hasNext = page < stepMeta.length - 1 && !dirty;
     let hasPrev = page > 0;
+
+    let children = React.Children.toArray(this.props.children);
 
     return (
       <div className={cn(align.full, align.allCenter, align.noMarginPad)}>
@@ -124,6 +127,17 @@ export default class StepWizardContainer extends Component {
                 </Row>
               </CardFooter>
             </Card>
+            <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
+              {children.length.forEach.map((e, i) => {
+                return (
+                  <StepIndicator
+                    key={i}
+                    stepNumber={page}
+                    onClick={this.onClick}
+                  />
+                );
+              })}
+            </Row>
           </Col>
         </Row>
       </div>
