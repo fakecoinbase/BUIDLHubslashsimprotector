@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+import cn from "classnames";
 
 export default class InputField extends React.Component {
   render() {
@@ -16,6 +17,7 @@ export default class InputField extends React.Component {
             onChange={this.props.onChange}
             value={this.props.value}
             placeholder={this.props.placeholder}
+            className={cn("form_field_input")}
           />
         </FormGroup>
       </React.Fragment>

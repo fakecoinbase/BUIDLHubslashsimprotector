@@ -1,6 +1,12 @@
 .card-dimensions {
-  min-width: 55vw !important;
-  min-height: 65vh !important;
+  @include xs() {
+    max-width: 80vw !important;
+    max-height: 65vh !important;
+  }
+  @include md() {
+    max-width: 60vw !important;
+    max-height: 65vh !important;
+  }
 }
 
 .card-header {
@@ -13,9 +19,9 @@
 
 .card-text {
   font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  color: $gray-600;
-  font-size: 1.5rem;
+  font-weight: 300;
+  color: $gray-700;
+  font-size: 1rem;
 }
 
 .param-modal {

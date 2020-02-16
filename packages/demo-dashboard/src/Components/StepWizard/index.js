@@ -83,22 +83,7 @@ export default class StepWizardContainer extends Component {
                 align.noMarginPad
               )}
             >
-              <CardHeader
-                className={cn(align.full, "step-header", "card-header")}
-              >
-                <div
-                  className={cn(
-                    align.full,
-                    align.leftCenter,
-                    align.noMarginPad
-                  )}
-                >
-                  <span className={cn("font-weight-bold", "text-1")}>
-                    {/* {meta.title} */}
-                    {this.props.header}
-                  </span>
-                </div>
-              </CardHeader>
+              {/* REMOVED CARD HEADER FROM HERE */}
 
               <CardBody
                 className={cn("step-body", align.full, align.noMarginPad)}
@@ -145,3 +130,14 @@ export default class StepWizardContainer extends Component {
     );
   }
 }
+
+// CARD HEADER
+
+// <CardHeader className={cn(align.full, "step-header", "card-header")}>
+//   <div className={cn(align.full, align.leftCenter, align.noMarginPad)}>
+//     <span className={cn("font-weight-bold", "text-1")}>
+//       {/* {meta.title} */}
+//       {this.props.header}
+//     </span>
+//   </div>
+// </CardHeader>;
