@@ -44,5 +44,8 @@
       "!src/serviceWorker.{js,jsx}",
       "!src/**/*.(spec|test|stories).{js,jsx}"
     ]
+  },
+  "resolutions": {
+    "ethereumjs-wallet": "0.6.4"
   }
 }
