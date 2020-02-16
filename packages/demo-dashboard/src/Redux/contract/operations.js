@@ -4,19 +4,17 @@ import abi from "Constants/abi/SimProtector.json";
 import { ethers } from "ethers";
 import { ArbProvider } from "arb-provider-ethers";
 
-const ADDR = "0xe345Ef5532B82db821DEa89E2ED5a5CF689583e3";
+// const ADDR = "0xebb10aadcfe3903a474dda106cffa597794b7a66"; // full rinkeby
+const ADDR = "0x895521964D724c8362A36608AAf09A3D7d0A0445"; // arbitrum
+// const ADDR = "0xdd03704a1d8540b12889a7837161127632c21c14"; // rollup
 
 const init = () => async dispatch => {
   try {
     dispatch(Creators.initStart());
-    //TODO: swap out provider for L2 provider
-    // let provider = ethers.getDefaultProvider("rinkeby");
     let arbProvider = new ArbProvider(
       "http://104.248.9.236:1235",
-      // new ethers.providers.Web3Provider(global.web3.currentProvider)
       new ethers.providers.Web3Provider(window.ethereum)
     );
-    // let provider = new ethers.providers.Web3Provider(global.web3.currentProvider, "ropsten");
 
     const accounts = await window.ethereum.enable();
     const signer = arbProvider.getSigner()
@@ -39,10 +37,11 @@ const init = () => async dispatch => {
 const addProvider = address => async (dispatch, getState) => {
   try {
     dispatch(Creators.working(true));
-
-    await getState().contract.instance.addProvider(address);
+    const contr = await getState().contract.instance;
+    await contr["addProvider(address)"](address);
+    console.log('done')
   } catch (e) {
-    console.log(e);
+    console.log('add provider err', e);
     dispatch(toastr.error("Problem adding provider"));
   }
 };
@@ -55,9 +54,9 @@ const registerPhoneNumber = (phoneNumber, numberOwner) => async (
     dispatch(Creators.working(true));
     let hashed = ethers.utils.id(phoneNumber);
     const contr = await getState().contract.instance;
-    console.log('contr', contr)
-    await contr.registerPhoneNumber(hashed, numberOwner);
+    contr["registerPhoneNumber(uint256,address)"](hashed, numberOwner);
     console.log('done')
+    
   } catch (e) {
     dispatch(toastr.error("problem register number"));
   }

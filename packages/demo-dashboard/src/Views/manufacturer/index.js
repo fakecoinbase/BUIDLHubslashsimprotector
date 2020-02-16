@@ -5,6 +5,7 @@ import { default as ConOps } from 'Redux/contract/operations'
 import _ from 'lodash';
 
 const s2p = state => {
+    console.log('state', state)
     let ifc = new ethers.utils.Interface(state.contract.abi);
     return {
         functions: _.keys(ifc.functions).filter(k=>k.indexOf("(") < 0).map(k=>{
@@ -30,8 +31,11 @@ const s2p = state => {
 
             return data;
         },
-        triggerFunction: (phoneNumber, numberOwner) => {
+        registerPhoneNumber: (phoneNumber, numberOwner) => {
             dispatch(ConOps.registerPhoneNumber(phoneNumber, numberOwner))
+        },
+        addProvider: (address) => {
+            dispatch(ConOps.addProvider(address))
         }
     } 
 } 

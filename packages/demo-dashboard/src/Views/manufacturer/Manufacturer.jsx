@@ -127,13 +127,17 @@ const MainPage = props => {
     ins = selectedFn.inputs;
   }
 
-  const triggerFunction = () => {
+  const registerPhoneNumber = () => {
       tryCall(
-        props.triggerFunction,
+        props.registerPhoneNumber,
         "123456",
         "0x803428e38DBFDf2EB25D94B538A1CFc395E66615"
       );
   }
+
+  const addProvider = () => [
+    tryCall(props.addProvider, "0x803428e38DBFDf2EB25D94B538A1CFc395E66615")
+  ];
 
   return (
     <div className={cn(align.full, align.topCenter, align.noMarginPad)}>
@@ -141,8 +145,11 @@ const MainPage = props => {
 
       <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
         <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
-           <button onClick={triggerFunction}>
-               Trigger
+           <button onClick={registerPhoneNumber}>
+               registerPhoneNumber
+            </button> 
+           <button onClick={addProvider}>
+               addprovider
             </button> 
             <button onClick={window.ethereum.enable}>
                enable 
