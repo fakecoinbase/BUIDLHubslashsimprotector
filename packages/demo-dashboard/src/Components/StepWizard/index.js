@@ -36,6 +36,7 @@ export default class StepWizardContainer extends Component {
     if (n >= this.props.stepMeta.length) {
       n = this.props.stateMeta.length - 1;
     }
+
     if (this.wizardRef.current.nextStep) {
       this.wizardRef.current.nextStep();
       this.setState({
@@ -59,88 +60,62 @@ export default class StepWizardContainer extends Component {
   };
 
   render() {
-    const { stepMeta } = this.props;
+    const { stepMeta, noButtons, noHeader } = this.props;
 
     let page = this.state.page;
     let meta = stepMeta[page];
     let dirty = meta.dirty;
     let nextTitle = meta.nextTitle;
-    let nextColor = meta.nextColor;
     let hasNext = page < stepMeta.length - 1 && !dirty;
     let hasPrev = page > 0;
 
     let children = React.Children.toArray(this.props.children);
 
     return (
-      <div className={cn(align.full, align.allCenter, align.noMarginPad)}>
-        <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
-          <Col
-            xs="10"
-            className={cn(align.allCenter, align.noMarginPad, "param-modal")}
-          >
-            <Card
-              className={cn(
-                "step-card",
-                "card-dimensions",
-                align.full,
-                align.noMarginPad
-              )}
+      <React.Fragment>
+        <Card className={cn("step-card", align.full, align.noMarginPad)}>
+          <CardBody className={cn("step-body", align.full, align.noMarginPad)}>
+            <StepWizard ref={this.wizardRef}>{this.props.children}</StepWizard>
+          </CardBody>
+
+          {!noButtons && (
+            <CardFooter
+              className={cn(align.full, align.rightCenter, align.noMarginPad)}
             >
-              {/* REMOVED CARD HEADER FROM HERE */}
-
-              <CardBody
-                className={cn("step-body", align.full, align.noMarginPad)}
+              <Row
+                className={cn(align.full, align.noMarginPad, align.allCenter)}
               >
-                <StepWizard ref={this.wizardRef}>
-                  {this.props.children}
-                </StepWizard>
-              </CardBody>
+                <Col xs="6" className={cn(align.leftCenter, align.noMarginPad)}>
+                  <ButtonPrevious
+                    size="sm"
+                    color={hasPrev ? "primary" : "secondary"}
+                    onClick={this.prev}
+                    disabled={!hasPrev}
+                  >
+                    Prev
+                  </ButtonPrevious>
+                </Col>
 
-              <CardFooter
-                className={cn(align.full, align.rightCenter, align.noMarginPad)}
-              >
-                <Row
-                  className={cn(align.full, align.noMarginPad, align.allCenter)}
+                <Col
+                  xs="6"
+                  className={cn(align.rightCenter, align.noMarginPad)}
                 >
-                  <Col
-                    xs="6"
-                    className={cn(align.leftCenter, align.noMarginPad)}
-                  >
-                    <ButtonPrevious
-                      size="sm"
-                      color={hasPrev ? "primary" : "secondary"}
-                      onClick={this.prev}
-                      disabled={!hasPrev}
-                    >
-                      Prev
-                    </ButtonPrevious>
-                  </Col>
-
-                  <Col
-                    xs="6"
-                    className={cn(align.rightCenter, align.noMarginPad)}
-                  >
-                    <ButtonProgress onClick={this.next} disabled={!hasNext}>
-                      {nextTitle || "Next"}
-                    </ButtonProgress>
-                  </Col>
-                </Row>
-              </CardFooter>
-            </Card>
-            <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
-              {children.length.forEach.map((e, i) => {
-                return (
-                  <StepIndicator
-                    key={i}
-                    stepNumber={page}
-                    onClick={this.onClick}
-                  />
-                );
-              })}
-            </Row>
-          </Col>
+                  <ButtonProgress onClick={this.next} disabled={!hasNext}>
+                    {nextTitle || "Next"}
+                  </ButtonProgress>
+                </Col>
+              </Row>
+            </CardFooter>
+          )}
+        </Card>
+        <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
+          {children.length.forEach.map((e, i) => {
+            return (
+              <StepIndicator key={i} stepNumber={page} onClick={this.onClick} />
+            );
+          })}
         </Row>
-      </div>
+      </React.Fragment>
     );
   }
 }

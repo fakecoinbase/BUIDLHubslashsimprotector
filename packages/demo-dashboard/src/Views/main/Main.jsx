@@ -58,6 +58,8 @@ export default class MainView extends Component {
   };
 
   handleNextStep = idx => {
+    console.log("NEXT STEP", idx);
+
     switch (idx) {
       case 0: {
         return this.register();
@@ -91,17 +93,17 @@ export default class MainView extends Component {
       }
     ];
     return (
-      <div className={cn(align.full, align.topCenter, align.noMarginPad)}>
+      <div className={cn("main-start", align.full, align.topCenter, align.noMarginPad)}>
         <Loading loading={this.state.loading} />
 
         <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
           <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
             <Navigation />
           </Col>
-          <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
+          <Col xs="8" className={cn(align.allCenter, align.noMarginPad)}>
             <StepWizard stepMeta={steps} onNext={this.handleNextStep}>
-              <Step1 />
-              <Step2 />
+              <Step1 fieldChanged={this.fieldChanged} stateData={this.state.data} />
+              <Step2 fieldChanged={this.fieldChanged}  stateData={this.state.data}  />
             </StepWizard>
           </Col>
         </Row>
@@ -109,46 +111,3 @@ export default class MainView extends Component {
     );
   }
 }
-
-/***
-     <div
-     className={cn(align.full, align.allCenter, align.noMarginPad)}
-   >
-     <Row
-       className={cn(align.full, align.noMarginPad, align.allCenter)}
-     >
-       <Col
-         xs="12"
-         className={cn(align.allCenter, align.noMarginPad)}
-       >
-         <span className={cn("font-weight-bold", "text-3")}>
-           Activation
-         </span>
-       </Col>
-       <Col
-         xs="12"
-         className={cn(align.allCenter, align.noMarginPad)}
-       >
-         <CardText className={cn(align.topLeft, "mt-5")}>
-           Thank you for activating SAFENET(c).
-         </CardText>
-       </Col>
-       <Col
-         xs="12"
-         className={cn(align.allCenter, align.noMarginPad)}
-       >
-         <CardText className={cn(align.topLeft, "my-2")}>
-           0x2a0c0DBEcC7E4D658f48E01e3fA353F44050c208
-         </CardText>
-       </Col>
-       <Col
-         xs="12"
-         className={cn(align.allCenter, align.noMarginPad)}
-       >
-         <CardText className={cn(align.topLeft, "my-2")}>
-           One more step required.
-         </CardText>
-       </Col>
-     </Row>
-   </div>
-     */

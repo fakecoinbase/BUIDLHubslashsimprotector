@@ -1,9 +1,13 @@
 .step-card {
-    
+    background: transparent !important;
+    border: 0;
+
     .step-body {
        // max-width: 600px !important;
         overflow: hidden !important;
         min-height: 400px !important;
+        //background: $white;
         
     }
+
 }
