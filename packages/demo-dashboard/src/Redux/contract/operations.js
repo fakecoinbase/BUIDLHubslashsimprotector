@@ -4,14 +4,27 @@ import abi from 'Constants/abi/SimProtector.json';
 import {ethers} from 'ethers';
 
 
-const ADDR = "0xe345Ef5532B82db821DEa89E2ED5a5CF689583e3";
+const ROPSTEN_ADDR = "0xAA92f0E922ea64912DE454048deF8D3274260f47"
+const RINKEBY_ADDR = "0xe345Ef5532B82db821DEa89E2ED5a5CF689583e3";
 
 const init = () => async dispatch => {
     try {
         dispatch(Creators.initStart());
+        if(typeof global.web3 === 'undefined') {
+            dispatch(toastr.error("No web3 provider found in environment"));
+            return;
+        }
+        if(typeof global.ethereum === 'undefined') {
+            dispatch(toastr.error("No ethereum provider found in environment"));
+            return;
+        }
+
         //TODO: swap out provider for L2 provider
-        let provider = ethers.getDefaultProvider('rinkeby');
-        let con = new ethers.Contract(ADDR, abi.abi, provider);
+        
+        const accounts = await global.ethereum.enable();
+
+        let provider = new ethers.providers.Web3Provider(global.web3.currentProvider, "ropsten"); //ethers.getDefaultProvider('rinkeby');
+        let con = new ethers.Contract(ROPSTEN_ADDR, abi.abi, provider.getSigner());
         dispatch(Creators.initSuccess({
             contract: con,
             provider: provider,
@@ -40,8 +53,12 @@ const registerPhoneNumber = (phoneNumber, numberOwner) => async (dispatch, getSt
     try {
         dispatch(Creators.working(true));
         let hashed = ethers.utils.id(phoneNumber);
-        await getState().contract.instance.registerPhoneNumber(hashed, numberOwner);
+        
+        let txn = await getState().contract.instance.registerPhoneNumber(hashed, numberOwner);
+        let rec = await txn.wait(1);
+        return rec;
     } catch (e) {
+        console.log(e);
         dispatch(toastr.error("problem register number"));
     }
 }

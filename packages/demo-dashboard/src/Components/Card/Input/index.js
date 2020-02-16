@@ -13,10 +13,10 @@ export default class InputField extends React.Component {
             type="input"
             name="text"
             id={this.props.id}
+            onChange={this.props.onChange}
+            value={this.props.value}
             placeholder={this.props.placeholder}
-          >
-            {this.props.children}
-          </Input>
+          />
         </FormGroup>
       </React.Fragment>
     );

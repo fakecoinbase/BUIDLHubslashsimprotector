@@ -28,7 +28,9 @@ export default class StepWizardContainer extends Component {
     this.wizardRef = React.createRef();
   }
 
-  next = () => {
+  next = async () => {
+    await tryCall(this.props.onNext, this.state.page);
+
     let n = this.state.page + 1;
     if (n >= this.props.stepMeta.length) {
       n = this.props.stateMeta.length - 1;
@@ -61,6 +63,8 @@ export default class StepWizardContainer extends Component {
     let page = this.state.page;
     let meta = stepMeta[page];
     let dirty = meta.dirty;
+    let nextTitle = meta.nextTitle;
+    let nextColor = meta.nextColor;
     let hasNext = page < stepMeta.length - 1 && !dirty;
     let hasPrev = page > 0;
 
@@ -129,7 +133,7 @@ export default class StepWizardContainer extends Component {
                     className={cn(align.rightCenter, align.noMarginPad)}
                   >
                     <ButtonProgress onClick={this.next} disabled={!hasNext}>
-                      Next
+                      {nextTitle || "Next"}
                     </ButtonProgress>
                   </Col>
                 </Row>
