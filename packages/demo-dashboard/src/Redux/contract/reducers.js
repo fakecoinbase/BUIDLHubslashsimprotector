@@ -24,6 +24,7 @@ const success = (state=INIT, action) => {
         provider: action.contract.provider,
         abi: action.contract.abi,
         recentEvents: action.contract.events,
+        lastReceived: action.contract.events[0],
         loading: false
     }
 }

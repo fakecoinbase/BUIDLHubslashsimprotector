@@ -53,7 +53,7 @@ const init = () => async dispatch => {
                 owner
             }
         });
-        events.sort((a, b)=>b.timstamp-a.timestamp);
+        events.sort((a, b)=>b.timestamp-a.timestamp);
 
         dispatch(Creators.initSuccess({
             contract: con,
@@ -82,6 +82,7 @@ const addProvider = (address) => async (dispatch, getState) => {
 
 const registerPhoneNumber = (phoneNumber, numberOwner) => async (dispatch, getState) => {
     try {
+        
         dispatch(Creators.working(true));
         let hashed = ethers.utils.id(phoneNumber);
         

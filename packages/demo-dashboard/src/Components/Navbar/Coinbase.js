@@ -9,7 +9,11 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from "reactstrap";
 import React, { Component } from "react";
 import LogoBlock from "./LogoBlock/Coinbase";
@@ -74,12 +78,7 @@ export default class Navigation extends React.Component {
                   "nav_items_collapse_style"
                 )}
               >
-                <a
-                  className={cn("nav_link_coinbase")}
-                  href="/safenet"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a className={cn("nav_link_coinbase")} href="/main">
                   1. Telco Trusted Customer
                 </a>
               </NavItem>
@@ -105,6 +104,16 @@ export default class Navigation extends React.Component {
                   3. Deactivate
                 </a>
               </NavItem>
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  About
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>Github</DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>Background</DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
             </Nav>
           </Collapse>
         </Navbar>

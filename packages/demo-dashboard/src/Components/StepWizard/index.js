@@ -35,6 +35,7 @@ export default class StepWizardContainer extends Component {
     if (n >= this.props.stepMeta.length) {
       n = this.props.stateMeta.length - 1;
     }
+    
     if (this.wizardRef.current.nextStep) {
       this.wizardRef.current.nextStep();
       this.setState({
@@ -76,25 +77,6 @@ export default class StepWizardContainer extends Component {
                 align.noMarginPad
               )}
             >
-              {
-                !noHeader &&
-                  <CardHeader
-                    className={cn(align.full, "step-header", "card-header")}
-                  >
-                    <div
-                      className={cn(
-                        align.full,
-                        align.leftCenter,
-                        align.noMarginPad
-                      )}
-                    >
-                      <span className={cn("font-weight-bold", "text-1")}>
-                        {/* {meta.title} */}
-                        {this.props.header}
-                      </span>
-                    </div>
-                  </CardHeader>
-                }
 
               <CardBody
                 className={cn("step-body", align.full, align.noMarginPad)}
@@ -140,3 +122,14 @@ export default class StepWizardContainer extends Component {
     );
   }
 }
+
+// CARD HEADER
+
+// <CardHeader className={cn(align.full, "step-header", "card-header")}>
+//   <div className={cn(align.full, align.leftCenter, align.noMarginPad)}>
+//     <span className={cn("font-weight-bold", "text-1")}>
+//       {/* {meta.title} */}
+//       {this.props.header}
+//     </span>
+//   </div>
+// </CardHeader>;

@@ -11,20 +11,20 @@ import {
   CardText,
   Button
 } from "reactstrap";
-import Loading from 'Components/Loading';
+import Loading from "Components/Loading";
 import React, { Component } from "react";
 import QRReader from "Components/QRReader";
 import Navigation from "Components/Navbar";
 // import CardView from "Components/Card";
 import InputField from "Components/Card/Input";
 import StepWizard from "Components/StepWizard";
-import {tryCall} from 'Utils';
+import { tryCall } from "Utils";
 import ButtonConfirm from "Components/Button/Confirm";
 import ButtonReject from "Components/Button/Reject";
+import Step1 from "./Step1";
+import Step2 from "./Step2";
 
 export default class MainView extends Component {
-  
-
   constructor(props) {
     super(props);
     this.state = {
@@ -35,34 +35,38 @@ export default class MainView extends Component {
     };
   }
 
-  register =  () => {
+  register = () => {
     return new Promise((done, err) => {
-      this.setState({
-        loading: true
-      }, async () => {
-        try { 
-          let rec = await tryCall(this.props.sendTxn, this.state.data);
-          console.log("RECEIPT", rec);
-          done();
-        } catch (e) {
-          console.log(e);
-         
+      this.setState(
+        {
+          loading: true
+        },
+        async () => {
+          try {
+            let rec = await tryCall(this.props.sendTxn, this.state.data);
+            console.log("RECEIPT", rec);
+            done();
+          } catch (e) {
+            console.log(e);
+          }
+          this.setState({
+            loading: false
+          });
         }
-        this.setState({
-          loading: false
-        })
-      })
-    })
-  }
+      );
+    });
+  };
 
   handleNextStep = idx => {
-    switch(idx) {
+    console.log("NEXT STEP", idx);
+
+    switch (idx) {
       case 0: {
         return this.register();
         break;
       }
     }
-  }
+  };
 
   fieldChanged = (fld, val) => {
     this.setState({
@@ -70,62 +74,15 @@ export default class MainView extends Component {
         ...this.state.data,
         [fld]: val
       }
-    })
-  }
+    });
+  };
 
   render() {
     const { functions } = this.props;
 
     let dirty = this.state.dirty;
 
-    /***
-     <div
-     className={cn(align.full, align.allCenter, align.noMarginPad)}
-   >
-     <Row
-       className={cn(align.full, align.noMarginPad, align.allCenter)}
-     >
-       <Col
-         xs="12"
-         className={cn(align.allCenter, align.noMarginPad)}
-       >
-         <span className={cn("font-weight-bold", "text-3")}>
-           Activation
-         </span>
-       </Col>
-       <Col
-         xs="12"
-         className={cn(align.allCenter, align.noMarginPad)}
-       >
-         <CardText className={cn(align.topLeft, "mt-5")}>
-           Thank you for activating SAFENET(c).
-         </CardText>
-       </Col>
-       <Col
-         xs="12"
-         className={cn(align.allCenter, align.noMarginPad)}
-       >
-         <CardText className={cn(align.topLeft, "my-2")}>
-           0x2a0c0DBEcC7E4D658f48E01e3fA353F44050c208
-         </CardText>
-       </Col>
-       <Col
-         xs="12"
-         className={cn(align.allCenter, align.noMarginPad)}
-       >
-         <CardText className={cn(align.topLeft, "my-2")}>
-           One more step required.
-         </CardText>
-       </Col>
-     </Row>
-   </div>
-     */
     let steps = [
-     /* {
-        title: "Activation",
-       
-        dirty
-      },*/
       {
         title: "User Details",
         nextTitle: "Confirm",
@@ -143,87 +100,10 @@ export default class MainView extends Component {
           <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
             <Navigation />
           </Col>
-          <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
+          <Col xs="8" className={cn(align.allCenter, align.noMarginPad)}>
             <StepWizard stepMeta={steps} onNext={this.handleNextStep}>
-              
-              {/* STEP 2 */}
-              <div
-                className={cn(align.full, align.allCenter, align.noMarginPad)}
-              >
-                <Row
-                  className={cn(align.full, align.noMarginPad, align.topCenter)}
-                >
-                  <Col
-                    xs="12"
-                    className={cn(align.allCenter, align.noMarginPad)}
-                  >
-                    <span className={cn("font-weight-bold", "text-3")}>
-                      Customer Details
-                    </span>
-                  </Col>
-                  <Col
-                    xs="12"
-                    className={cn(align.allCenter, "py-3", align.noMarginPad)}
-                  >
-                    <InputField label="Customer Wallet" placeholder="customer wallet" 
-                        value={this.state.data.address || ''}
-                        onChange={e=>this.fieldChanged('address', e.target.value)}/>
-                  </Col>
-                  <Col
-                    xs="12"
-                    className={cn(align.allCenter, "py-3", align.noMarginPad)}
-                  >
-                    <InputField label="Customer Phone Number" placeholder="Phone Number" 
-                        value={this.state.data.phoneNumber || ''}
-                        onChange={e=>this.fieldChanged("phoneNumber", e.target.value)}/>
-                  </Col>
-
-                  <Col
-                    xs="12"
-                    className={cn(align.allCenter, "py-3", align.noMarginPad)}
-                  >
-                    <InputField label="New SIM ID" placeholder="SIM ID" 
-                        value={this.state.data.simID || ''}
-                        onChange={e=>this.fieldChanged("simID", e.target.value)}/>
-                  </Col>
-
-                  <Col
-                    xs="12"
-                    className={cn(align.allCenter, align.noMarginPad)}
-                  ></Col>
-                  <Col
-                    xs="12"
-                    className={cn(align.allCenter, align.noMarginPad)}
-                  >
-                   
-                  </Col>
-                </Row>
-              </div>
-              {/* STEP 3 */}
-              <div
-                className={cn(align.full, align.allCenter, align.noMarginPad)}
-              >
-                <Row
-                  className={cn(align.full, align.noMarginPad, align.allCenter)}
-                >
-                  <Col
-                    xs="12"
-                    className={cn(align.allCenter, align.noMarginPad)}
-                  >
-                    <span className={cn("font-weight-bold", "text-3")}>
-                      Customer Details
-                    </span>
-                  </Col>
-                  <Col
-                    xs="12"
-                    className={cn(align.allCenter, align.noMarginPad)}
-                  >
-                    <CardText className={cn(align.topLeft, "my-2")}>
-                      Thank you, confirmed.
-                    </CardText>
-                  </Col>
-                </Row>
-              </div>
+              <Step1 fieldChanged={this.fieldChanged} stateData={this.state.data} />
+              <Step2 fieldChanged={this.fieldChanged}  stateData={this.state.data}  />
             </StepWizard>
           </Col>
         </Row>
