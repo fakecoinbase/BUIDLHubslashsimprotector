@@ -14,8 +14,9 @@ import React, { Component } from "react";
 import ButtonProgress from "Components/Button/Progress";
 import ButtonPrevious from "Components/Button/Previous";
 
-import StepIndicator from "./StepIndicator";
+import StepIndicator from "./StepIndicatorContainer";
 import StepWizard from "react-step-wizard";
+
 
 /**
  * Turns child elements into an animated set of steps
@@ -59,8 +60,18 @@ export default class StepWizardContainer extends Component {
     }
   };
 
+  toStep = idx => {
+    
+    if(this.wizardRef.current.goToStep) {
+      this.wizardRef.current.goToStep(idx+1);
+      this.setState({
+        page: idx
+      })
+    } 
+  }
+
   render() {
-    const { stepMeta, noButtons, noHeader } = this.props;
+    const { stepMeta, noButtons, lightIndicator } = this.props;
 
     let page = this.state.page;
     let meta = stepMeta[page];
@@ -70,9 +81,10 @@ export default class StepWizardContainer extends Component {
     let hasPrev = page > 0;
 
     let children = React.Children.toArray(this.props.children);
-
+    
     return (
-      <React.Fragment>
+      <div className={cn(align.full, align.topCenter, align.noMarginPad)}>
+        
         <Card className={cn("step-card", align.full, align.noMarginPad)}>
           <CardBody className={cn("step-body", align.full, align.noMarginPad)}>
             <StepWizard ref={this.wizardRef}>{this.props.children}</StepWizard>
@@ -108,14 +120,13 @@ export default class StepWizardContainer extends Component {
             </CardFooter>
           )}
         </Card>
-        <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
-          {children.length.forEach.map((e, i) => {
-            return (
-              <StepIndicator key={i} stepNumber={page} onClick={this.onClick} />
-            );
-          })}
+        <Row className={cn(align.full, "py-4", align.noMarginPad, align.allCenter)}>
+              <StepIndicator light={lightIndicator} 
+                             stepCount={children.length} 
+                             stepNumber={page} 
+                             goToStep={this.toStep} />
         </Row>
-      </React.Fragment>
+      </div>
     );
   }
 }

@@ -38,7 +38,7 @@ export default class Main1 extends React.Component {
             xs="12"
             className={cn(align.allCenter, align.noMarginPad)}
           >
-            <div className={cn("step", align.full, align.topCenter, align.noMarginPad)}>
+            <div className={cn("step", align.full, align.topCenter, "pb-5", align.noMarginPad)}>
               
                 <CardText>Activating SAFENET(c) for the client...</CardText>
               
@@ -54,6 +54,12 @@ export default class Main1 extends React.Component {
                   placeholder="Phone Number"
                   value={stateData.phoneNumber || ""}
                   onChange={e => fieldChanged("phoneNumber", e.target.value)}
+                />
+
+                <InputField
+                  placeholder="SIM ID"
+                  value={stateData.simID || ""}
+                  onChange={e => fieldChanged("simID", e.target.value)}
                 />
              </div>
              </Col>

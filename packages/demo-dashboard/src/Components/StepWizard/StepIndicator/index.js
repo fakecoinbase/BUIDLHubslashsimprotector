@@ -2,6 +2,7 @@ import cn from "classnames";
 import * as align from "Constants/alignments";
 import { Row, Col } from "reactstrap";
 import React, { Component } from "react";
+import {tryCall} from 'Utils';
 
 export default class StepIndicator extends React.Component {
   constructor(props) {
@@ -10,22 +11,33 @@ export default class StepIndicator extends React.Component {
   }
 
   render() {
-    let { page, onClick } = this.props;
+    let { number, selected, light, onClick } = this.props;
+    
     return (
-      <Col xs="3" className={cn(align.allCenter, align.noMarginPad)}>
-        <a href={this.onClick}>
-          <div
+         <div
             className={cn(
               align.full,
               align.allCenter,
+              "clickable",
+              {selected},
+              {light},
               align.noMarginPad,
-              "stepindicator"
+              "stepindicator",
+              "mx-3"
             )}
+
+            onClick={e=>{
+              e.stopPropagation();
+              e.preventDefault();
+              tryCall(onClick)
+            }}
           >
-            <p className={cn("stepindicator-num")}>{page}</p>
+            <span className={cn("stepindicator-num ",  'font-weight-bold', 'text-1-5')}>
+              {number}
+            </span>
+           
           </div>
-        </a>
-      </Col>
+        
     );
   }
 }

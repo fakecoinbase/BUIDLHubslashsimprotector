@@ -2,7 +2,28 @@
   background-color: $white;
   width: 100px;
   border-radius: 50%;
+  min-height: 60px;
+  min-width: 60px;
+  max-height: 60px;
+  max-width: 60px;
+
   filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.16));
+
+  &.light {
+    background: #678dac !important;
+    color: $white !important;
+  }
+
+  &.selected {
+    background-color: #1c77c3 !important;
+    color: $white !important;
+
+    &.light {
+      background: $white !important;
+      color: $primary !important;
+    }
+  }
+
 }
 
 .stepindicator-num {
@@ -11,7 +32,3 @@
   font-weight: 300;
 }
 
-.stepindicator-step-active {
-  background-color: #1c77c3;
-  color: $white;
-}
