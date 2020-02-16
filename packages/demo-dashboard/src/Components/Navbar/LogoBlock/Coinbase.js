@@ -29,7 +29,7 @@ export default class LogoBlock extends React.Component {
               "font-weight-bold",
               "logoblocklandingfont",
               "logofontspacing",
-              bColor
+              "logofontcolorcoinbase"
             )}
             style={{ fontSize: "25px" }}
           >
