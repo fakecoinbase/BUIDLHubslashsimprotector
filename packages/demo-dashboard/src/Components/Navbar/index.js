@@ -74,12 +74,7 @@ export default class Navigation extends React.Component {
                   "nav_items_collapse_style"
                 )}
               >
-                <a
-                  className={cn("nav_link")}
-                  href="/safenet"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a className={cn("nav_link")} href="/main">
                   1. Telco Trusted Customer
                 </a>
               </NavItem>

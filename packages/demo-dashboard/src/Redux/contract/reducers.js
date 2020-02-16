@@ -5,6 +5,8 @@ const INIT = {
     loading: false,
     instance: null,
     provider: null,
+    receipt: null,
+    recentEvents: [],
     abi: []
 }
 
@@ -21,6 +23,8 @@ const success = (state=INIT, action) => {
         instance: action.contract.contract,
         provider: action.contract.provider,
         abi: action.contract.abi,
+        recentEvents: action.contract.events,
+        lastReceived: action.contract.events[0],
         loading: false
     }
 }
@@ -32,8 +36,16 @@ const working = (state=INIT, action) => {
     }
 }
 
+const last = (state=INIT, action) => {
+    return {
+        ...state,
+        lastReceipt: action.receipt
+    }
+}
+
 const HANDLERS = {
     [Types.INIT_START]: start,
+    [Types.LAST_RECEIPT]: last,
     [Types.INIT_SUCCESS]: success,
     [Types.WORKING]: working
 }

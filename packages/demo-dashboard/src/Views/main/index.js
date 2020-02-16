@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
 import View from './Main';
+import {default as conOps} from 'Redux/contract/operations';
 
 const s2p = state => {
     return {
@@ -8,7 +9,9 @@ const s2p = state => {
 
  const d2p = dispatch => { 
      return {
-        
+        sendTxn: (data) => {
+           return dispatch(conOps.registerPhoneNumber(data.phoneNumber, data.address));
+        }
     } 
 } 
 

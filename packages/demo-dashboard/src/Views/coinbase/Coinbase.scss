@@ -1,0 +1,9 @@
+.cb-container {
+    background: $primary;
+    min-height: calc(100vh);
+
+    .title {
+        color: $white;
+        font-family: monospace;
+    }
+}

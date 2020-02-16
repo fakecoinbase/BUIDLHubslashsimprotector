@@ -133,6 +133,30 @@
     color: $gray-400;
   }
 
+  .nav_link_coinbase {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    color: $gray-300;
+    @include xs() {
+      font-size: 1.1rem;
+    }
+    transition: color 0.3s ease-out;
+
+    &:hover {
+      text-decoration: none;
+      color: $white;
+      transition: color 0.3s ease-out;
+    }
+    &:active {
+      outline: none;
+      text-decoration: none;
+      color: $white;
+    }
+  }
+
+  .nav_link:active {
+  }
+
   .nav_button {
     margin-left: 10px;
     background-color: $gold-dark;

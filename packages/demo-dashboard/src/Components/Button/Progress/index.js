@@ -4,7 +4,7 @@ import cn from "classnames";
 
 export default class ButtonProgress extends React.Component {
   render() {
-    let { className, small, tiny, size } = this.props;
+    let { className, small, tiny, size, color } = this.props;
 
     if (small) {
       size = "sm";

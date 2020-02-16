@@ -1,0 +1,13 @@
+{
+  "name": "demo-api",
+  "main": "index.js",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "ethers": "^4.0.44",
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}

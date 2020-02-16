@@ -75,11 +75,15 @@ export default class Manufacturer extends Component {
 
     let steps = [
       {
-        title: "Txn Info",
+        title: "Activation",
         dirty
       },
       {
-        title: "2nd page"
+        title: "User Details",
+        dirty
+      },
+      {
+        title: "Confirm Details"
       }
     ];
 
@@ -92,6 +96,13 @@ export default class Manufacturer extends Component {
           generateCode={this.generateCode}
           paramChanged={this.paramChanged}
         />
+        <div className={cn(align.full, align.allCenter, align.noMarginPad)}>
+          <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
+            <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
+              <span className={cn("font-weight-light", "text-1")}>Page 2</span>
+            </Col>
+          </Row>
+        </div>
 
         <div className={cn(align.full, align.allCenter, align.noMarginPad)}>
           <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
@@ -127,18 +138,17 @@ const MainPage = props => {
     ins = selectedFn.inputs;
   }
 
-  const registerPhoneNumber = () => {
-      tryCall(
-        props.registerPhoneNumber,
-        "123456",
-        "0x803428e38DBFDf2EB25D94B538A1CFc395E66615"
-      );
-      
-  }
+   const registerPhoneNumber = () => {
+     tryCall(
+       props.registerPhoneNumber,
+       "123456",
+       "0x803428e38DBFDf2EB25D94B538A1CFc395E66615"
+     );
+   };
 
-  const addProvider = () => [
-    tryCall(props.addProvider, "0x803428e38DBFDf2EB25D94B538A1CFc395E66615")
-  ];
+   const addProvider = () => [
+     tryCall(props.addProvider, "0x803428e38DBFDf2EB25D94B538A1CFc395E66615")
+   ];
 
   return (
     <div className={cn(align.full, align.topCenter, align.noMarginPad)}>
@@ -146,15 +156,6 @@ const MainPage = props => {
 
       <Row className={cn(align.full, align.noMarginPad, align.allCenter)}>
         <Col xs="12" className={cn(align.allCenter, align.noMarginPad)}>
-           <button onClick={registerPhoneNumber}>
-               registerPhoneNumber
-            </button> 
-           <button onClick={addProvider}>
-               addprovider
-            </button> 
-            <button onClick={window.ethereum.enable}>
-               enable 
-            </button>
           Select function to encode
         </Col>
       </Row>

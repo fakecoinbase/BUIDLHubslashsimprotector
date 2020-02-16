@@ -6,8 +6,10 @@ const {
   initStart: null,
   initSuccess: ['contract'],
   reset: null,
+  lastReceipt: ['receipt'],
   failure: ['error'],
-  working: ['busy']
+  working: ['busy'],
+
 }, {prefix: "contract."});
 
 export {
