@@ -27,7 +27,7 @@
     "ethers": "^4.0.44",
     "font-awesome": "^4.7.0",
     "jwt-decode": "^2.2.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "monaco-editor": "^0.18.1",
     "node-sass": "^4.13.0",
     "prop-types": "^15.6.2",
